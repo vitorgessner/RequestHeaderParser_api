@@ -10,6 +10,13 @@ app.get('/', (req, res) => {
     return res.sendFile(__dirname + '/src/index.html');
 })
 
+app.get('/api/whoami', (req, res) => {
+    const software = req.headersDistinct['user-agent'][0]
+    const language = req.headersDistinct['accept-language'][0]
+    const ipaddress = req.ip
+    return res.json({ipaddress, language, software});
+})
+
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 })
